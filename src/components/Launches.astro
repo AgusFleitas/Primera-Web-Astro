@@ -1,0 +1,32 @@
+---
+// Imports.
+import CardLaunch from "./CardLaunch.astro";
+import { getLatestLaunches } from "../services/spacex";
+
+//Lógica Javascript.
+const docs = await getLatestLaunches();
+---
+
+<div class='launches-container'>
+  {
+    docs.map((launch) => (
+      <CardLaunch
+        id={launch.id}
+        img={launch.links.patch.small}
+        details={launch.details}
+        flightNumber={launch.flight_number}
+        success={launch.success}
+      />
+    ))
+  }
+</div>
+
+<style>
+  .launches-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    place-content: center;
+    gap: 24px;
+    margin: 48px 180px;
+  }
+</style>

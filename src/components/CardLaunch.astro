@@ -1,0 +1,58 @@
+---
+const { success, flightNumber, img, id, details } = Astro.props;
+const succesText = success ? "Éxito" : "Fracaso";
+---
+
+<a href={`/launch/${id}`}>
+  <img src={img} loading="lazy" alt={`Patch for launch ${id}`} />
+
+  <header>
+    <span class={success ? "success" : "failure"}>{succesText}</span>
+    <h2>Flight #{flightNumber}</h2>
+
+    <p>{details?.length > 40 ? details.slice(0, 40) + "..." : details}</p>
+  </header>
+</a>
+
+<style>
+  a {
+    text-decoration: none;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 16px;
+    padding: 16px;
+    transition: 0.5s ease;
+  }
+
+  img {
+    width: 100%;
+  }
+
+
+  h2 {
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  span {
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-weight: 500;
+  }
+
+  .success {
+    background-color: green;
+    color: lightgreen;
+  }
+
+  .failure {
+    background-color: crimson;
+    color: lightpink;
+  }
+
+  a:hover {
+    scale: 1.05;
+    border: 2px solid #9352e9;
+    background-color: rgb(147 82 233 / 0.2);
+  }
+</style>
